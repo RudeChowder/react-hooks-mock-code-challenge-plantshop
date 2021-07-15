@@ -5,6 +5,7 @@ import Search from "./Search";
 
 function PlantPage() {
   const [plants, setPlants] = useState([])
+  const [search, setSearch] = useState("")
   
   const plantsURL = "http://localhost:6001/plants"
 
@@ -18,15 +19,31 @@ function PlantPage() {
     setPlants([...plants, newPlant])
   }
 
+  const handleSearchChange = (event) => {
+    setSearch(event.target.value)
+  }
+
+  const plantsToDisplay = plants.filter( plant => {
+      if ( search === "" ) {
+        return true
+      } else {
+        return plant.name.toLowerCase().includes(search.toLowerCase())
+      }
+    })
+  
+
   return (
     <main>
       <NewPlantForm 
         onFormSubmit={handleFormSubmit}
         plantsURL={plantsURL}
       />
-      <Search />
+      <Search 
+        search={search}
+        onSearchChange={handleSearchChange}
+      />
       <PlantList 
-        plants={plants}
+        plants={plantsToDisplay}
       />
     </main>
   );
