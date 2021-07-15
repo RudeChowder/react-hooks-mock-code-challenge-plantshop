@@ -36,7 +36,7 @@ function NewPlantForm({ onFormSubmit, plantsURL }) {
           price: ""
         })
       })
-      .catch((reason) => alert(`Something went wrong! ${reason}`))
+      .catch((reason) => alert(`Could not add the plant! ${reason}`))
   }
 
   return (

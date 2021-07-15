@@ -23,6 +23,25 @@ function PlantPage() {
     setSearch(event.target.value)
   }
 
+  const handleDeletePlant = (id) => {
+    const configObj = {
+      method: "DELETE"
+    }
+
+    const result = window.confirm("Are you sure you'd like to delete this plant?")
+
+    if ( result === true ) {
+      fetch(`${plantsURL}/${id}`, configObj)
+        .then(() => {
+          const updatedPlants = plants.filter( plant => {
+            return plant.id !== id
+          })
+          setPlants(updatedPlants)
+        })
+        .catch(() => alert("Failed to delete the plant. Please try again"))
+    }
+  }
+
   const plantsToDisplay = plants.filter( plant => {
       if ( search === "" ) {
         return true
@@ -44,6 +63,7 @@ function PlantPage() {
       />
       <PlantList 
         plants={plantsToDisplay}
+        onDeletePlant={handleDeletePlant}
       />
     </main>
   );

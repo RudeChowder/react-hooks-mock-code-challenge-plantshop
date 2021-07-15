@@ -1,7 +1,7 @@
 import React from "react";
 import PlantCard from "./PlantCard";
 
-function PlantList({ plants }) {
+function PlantList({ plants, onDeletePlant }) {
   const plantComponents = plants.map( plant => {
     return(
       <PlantCard 
@@ -10,6 +10,7 @@ function PlantList({ plants }) {
         name={plant.name}
         image={plant.image}
         price={plant.price}
+        onDeletePlant={onDeletePlant}
       />
     )
   })
