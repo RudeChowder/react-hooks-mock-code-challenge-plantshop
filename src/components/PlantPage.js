@@ -14,11 +14,20 @@ function PlantPage() {
       .then(data => setPlants(data))
   }, [])
 
+  const handleFormSubmit = (newPlant) => {
+    setPlants([...plants, newPlant])
+  }
+
   return (
     <main>
-      <NewPlantForm />
+      <NewPlantForm 
+        onFormSubmit={handleFormSubmit}
+        plantsURL={plantsURL}
+      />
       <Search />
-      <PlantList plants={plants}/>
+      <PlantList 
+        plants={plants}
+      />
     </main>
   );
 }
